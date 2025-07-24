@@ -1,29 +1,18 @@
 const menu = [
   {
-    name: "Home",
-    sublinks: [],
+    name: "home",
     link: "/",
+    target: undefined,
   },
   {
-    name: "FAQ",
-    sublinks: [],
-    link: "/faq",
-  },
-  {
-    name: "Developers",
-    sublinks: [
-      {
-        name: "How to use Play Console",
-        link:
-          "https://support.google.com/googleplay/android-developer/answer/6112435?hl=en",
-      },
-    ],
+    name: "contact",
     link: undefined,
+    target: undefined,
   },
   {
-    name: "Contact Us",
-    sublinks: [],
-    link: undefined,
+    name: "Allegro",
+    link: "https://allegro.pl/",
+    target: "_blank",
   },
 ];
 

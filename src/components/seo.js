@@ -1,48 +1,55 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import Helmet from 'react-helmet'
-import { useStaticQuery, graphql } from 'gatsby'
+import React from "react";
+import PropTypes from "prop-types";
+import Helmet from "react-helmet";
+import { useStaticQuery, graphql } from "gatsby";
 
-function SEO({ description, lang, title, path }) {
+function SEO({ lang, title, path }) {
   const { site } = useStaticQuery(
     graphql`
       query {
         site {
           siteMetadata {
             siteUrl
-            title
-            description
-            author
           }
         }
       }
     `
-  )
+  );
 
-  const metaDescription = description || site.siteMetadata.description
-  const uniTitle = 'Web2App.app'
+  const keywordsPL =
+    "długopis z łusek, długopis z łuski kalibru .243, ręcznie robiony długopis, długopis kolekcjonerski, długopis z naboju, personalizowany długopis, unikalny długopis, prezent dla mężczyzny, prezent dla kolekcjonera, premium długopis, sklep z długopisami";
+  const keywordsEN =
+    "shell pen, .243 caliber shell pen, handmade pen, collectible pen, cartridge pen, personalized pen, unique pen, gift for man, gift for collector, premium pen, pen store";
+
+  const metaKeywords = lang === "pl" ? keywordsPL : keywordsEN;
+
+  const descriptions = {
+    pl:
+      "Ręcznie robione, ekskluzywne długopisy z używanych łusek. Unikalne połączenie rzemiosła i historii. Idealny prezent.",
+    en:
+      "Handcrafted, exclusive pens made from fired bullet casings. A unique blend of craftsmanship, history, and elegance. Perfect as a gift.",
+  };
+
+  const metaDescription = descriptions[lang] || descriptions.en;
 
   return (
     <Helmet
       htmlAttributes={{
-        lang
+        lang,
       }}
       title={title}
-      titleTemplate={`${site.siteMetadata.title} | %s`}
+      // titleTemplate={`%s | 243Pen.store`}
+      titleTemplate={`%s`}
     >
       <meta charSet="utf-8" />
-      <html lang="en" />
       <meta name="title" content={title} />
       <meta name="description" content={metaDescription} />
-      <meta name="keywords" content={title}></meta>
-      <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FF007A" />
-      <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#FF007A" />
+      <meta name="keywords" content={metaKeywords} />
 
-      <meta property="og:title" content={uniTitle} />
+      <meta property="og:title" content={title} />
       <meta property="og:description" content={metaDescription} />
-      <meta property="og:type" content={'website'} />
+      <meta property="og:type" content={"website"} />
       <meta property="og:url" content={site.siteMetadata.siteUrl + path} />
-      {/* <meta property="og:image" content={`${site.siteMetadata.siteUrl}${path ? path : '/images/'}twitter-card.png`} /> */}
 
       <link rel="alternate" type="application/rss+xml" href="/rss.xml" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
@@ -51,20 +58,17 @@ function SEO({ description, lang, title, path }) {
         rel="stylesheet"
       />
     </Helmet>
-  )
+  );
 }
 
 SEO.defaultProps = {
   lang: `en`,
-  meta: [],
-  description: ``
-}
+};
 
 SEO.propTypes = {
-  description: PropTypes.string,
+  title: PropTypes.string.isRequired,
   lang: PropTypes.string,
-  meta: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string.isRequired
-}
+  path: PropTypes.string,
+};
 
-export default SEO
+export default SEO;

@@ -1,15 +1,9 @@
-😎 Web2App.app homepage
-==========================
+# Symbol of transforming weapons into words
 
-Turn Website Into App
-----------------------
+Based on the source code of the [uniswap.org](https://uniswap.org) homepage ([GPL-3.0 license](https://github.com/Uniswap/org-v1/blob/main/LICENSE)).
 
-![Q7i2](https://github.com/Web2App-app/.github/assets/82395633/8e39bb4a-9ab7-4704-9c19-c1d4ec8eddf1)
+# React, JS, Firebase, Gatsby
 
-Contains the source code for the [web2app.app](https://web2app.app) homepage and is based on the source code of the [uniswap.org](https://uniswap.org) homepage ([GPL-3.0 license](https://github.com/Uniswap/org-v1/blob/main/LICENSE)).
-
-React, JS, Firebase, Gatsby
-===========
 <a href="https://reactjs.org/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/react-colored.svg" width="36" height="36" alt="React" /></a>
 <a href="https://www.gatsbyjs.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/gatsby-colored.svg" width="36" height="36" alt="Gatsby" /></a>
 <a href="https://firebase.google.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/firebase-colored.svg" width="36" height="36" alt="Firebase" /></a>
@@ -30,11 +24,11 @@ To deploy the app please follow the steps specified in the [Firebase documentati
 
 ## Development
 
-`node >= 12.0.0`
+`node >= v20.18.1`
 
 ### To install packages:
 
-1. `npm install`
+1. `npm install --legacy-peer-deps`
 
 ### To start the dev server:
 
@@ -52,18 +46,20 @@ Runs the app in the development mode. Open http://localhost:8000 to view it in t
 
 ## Useful links
 
-Firebase: 
+Firebase:
 [firebase.google.com](https://firebase.google.com)
 
-Uniswap repo: 
+Uniswap repo:
 [github.com/Uniswap/org-v1](https://github.com/Uniswap/org-v1)
 
-License: 
+License:
 [GPL-3.0](https://github.com/Web2App-app/app-v1/blob/main/LICENSE)
 
 ## Contact
-contact@web2app.app
+
+contact@
 
 ## Team members
+
 [Uniswap team](https://github.com/Uniswap/org-v1)
 [@thomson159](https://github.com/thomson159)

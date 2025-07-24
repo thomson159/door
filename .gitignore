@@ -9,3 +9,4 @@ build
 public_dev
 .cache
 public
+.env

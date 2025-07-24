@@ -1,69 +1,77 @@
-const menu = require('./src/utils/menu')
+const menu = require("./src/utils/menu");
 
-require('dotenv').config({
-  path: `.env.${process.env.NODE_ENV}`
-})
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
 
 module.exports = {
   siteMetadata: {
-    title: `Web2App.app`,
-    description: `Turn website into app`,
-    author: `@web2app.app`,
+    title: `Premium Bullet Shell Pens – 243Pen.store`,
+    description: `Handcrafted, exclusive pens made from fired bullet casings. A unique blend of craftsmanship, history, and elegance. Perfect as a gift.`,
+    author: `@thomson159`,
     menulinks: menu,
-    siteUrl: `https://web2app.app/`,
-    repository: `https://github.com/web2app-app/app-v1`,
-    commit: process.env.NOW_GITHUB_COMMIT_SHA || `main`
+    siteUrl: `https://243pen.store`,
+    repository: `https://github.com/thomson159/pen`,
+    commit: process.env.NOW_GITHUB_COMMIT_SHA || `main`,
+  },
+  flags: {
+    DEV_SSR: false,
   },
   plugins: [
     {
-      resolve: `gatsby-plugin-canonical-urls`,
+      resolve: `gatsby-source-filesystem`,
       options: {
-        siteUrl: `https://web2app.app`
-      }
+        path: `${__dirname}/src/locales`,
+        name: `locales`,
+      },
     },
     {
-      resolve: 'gatsby-plugin-replace-path',
+      resolve: `gatsby-plugin-canonical-urls`,
+      options: {
+        siteUrl: `https://243pen.store`,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-replace-path",
       options: {
         pattern: /\d+-/g,
-        replacement: ''
-      }
+        replacement: "",
+      },
     },
     `re-slug`,
     {
       resolve: `gatsby-plugin-page-creator`,
       options: {
-        path: `${__dirname}/src/pages`
-      }
+        path: `${__dirname}/src/pages`,
+      },
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
-        path: `${__dirname}/src/images`
-      }
+        path: `${__dirname}/src/images`,
+      },
     },
-    `gatsby-plugin-sitemap`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-twitter`,
-    `gatsby-plugin-instagram-embed`,
     `gatsby-plugin-smoothscroll`,
     `gatsby-plugin-styled-components`,
     `gatsby-background-image`,
     {
-      resolve: 'gatsby-plugin-react-svg',
+      resolve: "gatsby-plugin-react-svg",
       options: {
         rule: {
-          include: /\.inline\.svg$/
-        }
-      }
+          include: /\.inline\.svg$/,
+        },
+      },
     },
-    'gatsby-remark-reading-time',
+    "gatsby-remark-reading-time",
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
         extensions: [`.mdx`, `.md`],
         defaultLayouts: {
-          default: require.resolve('./src/layouts'),
+          default: require.resolve("./src/layouts"),
         },
         remarkPlugins: [require(`remark-math`)],
         rehypePlugins: [require(`rehype-katex`)],
@@ -74,26 +82,26 @@ module.exports = {
           {
             resolve: `gatsby-remark-twitter-cards`,
             options: {
-              title: 'Web2App.app', // website title
-              separator: '|', // default
-              author: '@web2app.app',
+              title: "Premium Bullet Shell Pens – 243Pen.store",
+              separator: "|",
+              author: "@thomson159",
               // background: require.resolve('./static/images/twitter_card.png'), // path to 1200x630px file or hex code, defaults to black (#000000)
-              fontColor: '#663399', // defaults to white (#ffffff)
-              fontStyle: 'sans-serif', // default
-              titleFontSize: 124, // default
-              fontFile: require.resolve('./static/fonts/GT-Haptik-Regular.ttf') // will override fontStyle - path to custom TTF font
-            }
+              // fontColor: "#ffffff",
+              fontStyle: "sans-serif",
+              titleFontSize: 124,
+              fontFile: require.resolve("./static/fonts/GT-Haptik-Regular.ttf"),
+            },
           },
           `gatsby-remark-smartypants`,
           {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 1200,
-              showCaptions: true
-            }
-          }
-        ]
-      }
+              showCaptions: true,
+            },
+          },
+        ],
+      },
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
@@ -103,11 +111,11 @@ module.exports = {
         name: `gatsby-starter-default`,
         short_name: `starter`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
+        // background_color: `#663399`,
+        // theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/favicon.png` // This path is relative to the root of the site.
-      }
+        icon: `src/images/favicon.png`,
+      },
     },
-  ]
-}
+  ],
+};
