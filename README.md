@@ -2,6 +2,8 @@
 
 Based on the source code of the [uniswap.org](https://uniswap.org) homepage ([GPL-3.0 license](https://github.com/Uniswap/org-v1/blob/main/LICENSE)).
 
+Improved version of the [web2app.app](https://web2app.app) project, simplified code, better SEO, fixed navbar in mobile version, different smooth scrolling, added 3D model
+
 # React, JS, Firebase, Gatsby
 
 <a href="https://reactjs.org/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/react-colored.svg" width="36" height="36" alt="React" /></a>
