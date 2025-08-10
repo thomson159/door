@@ -5,7 +5,10 @@ import SEO from "../components/seo";
 import BG from "../components/bg";
 import { useTranslation } from "react-i18next";
 import "../i18n";
-import photo from "../images/photo.png";
+import photo3 from "../images/IMG5.jpg";
+import photo1 from "../images/IMG1.jpg";
+import photo2 from "../images/IMG2.jpg";
+import photo4 from "../images/IMG4.jpg";
 import ImageSwitcher from "../components/ImageSwitcher";
 import emailjs from "@emailjs/browser";
 import ModelScene from "../components/ModelScene";
@@ -295,7 +298,12 @@ const EcosystemSection = () => {
     <StyledSection>
       <StyledItemRow>
         <StyledItemColumn>
-          <ImageSwitcher img1={photo} img2={photo} />
+          <ImageSwitcher
+            img1={photo4}
+            img2={photo3}
+            title1={"polished | raw"}
+            title2={"raw"}
+          />
         </StyledItemColumn>
         <StyledItemColumn>
           <StyledSectionHeader>{t("ecosystem.title_2")}</StyledSectionHeader>
@@ -318,7 +326,12 @@ const EcosystemSection = () => {
           {/* <div style={{ marginTop: 14 }}>{t("37g")}</div> */}
         </StyledItemColumn>
         <StyledItemColumn>
-          <ImageSwitcher img1={photo} img2={photo} />
+          <ImageSwitcher
+            img1={photo2}
+            img2={photo1}
+            title1={"raw"}
+            title2={"raw"}
+          />
         </StyledItemColumn>
       </StyledItemRow>
 
