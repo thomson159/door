@@ -1,18 +1,40 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
+import "../i18n";
 
-export default function ImageSwitcher({ img1, img2, title1, title2 }) {
-  const [showAlt, setShowAlt] = useState(false);
+export default function ImageSwitcher({ images }) {
+  const [index, setIndex] = useState(0);
+  const { t } = useTranslation();
+
+  const handleClick = () => {
+    setIndex((prev) => (prev + 1) % images.length);
+  };
 
   return (
-    <Wrapper onClick={() => setShowAlt(!showAlt)}>
-      <Title>{showAlt ? title2 : title1}</Title>
-      <Image src={img1} alt="Image 1" visible={!showAlt} />
-      <Image src={img2} alt="Image 2" visible={showAlt} />
-      <Hint>click to change photo</Hint>
+    <Wrapper onClick={handleClick}>
+      <Title>{images[index].title}</Title>
+      {images.map((img, i) => (
+        <Image key={i} src={img.src} alt={img.title} visible={i === index} />
+      ))}
+      <Hint>{t("clickPhoto")}</Hint>
     </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  position: relative;
+  width: 100%;
+  height: 480px;
+  cursor: pointer;
+  overflow: hidden;
+  margin-bottom: 1.45rem;
+
+  @media (max-width: 640px) {
+    height: auto;
+    padding-top: 130%;
+  }
+`;
 
 const Title = styled.div`
   position: absolute;
@@ -27,20 +49,6 @@ const Title = styled.div`
   pointer-events: none;
 `;
 
-const Wrapper = styled.div`
-  position: relative;
-  width: 100%;
-  height: 500px;
-  cursor: pointer;
-  overflow: hidden;
-  margin-bottom: 1.45rem;
-
-  @media (max-width: 640px) {
-    height: auto;
-    padding-top: 130%;
-  }
-`;
-
 const Image = styled.img`
   position: absolute;
   top: 0;
@@ -50,10 +58,14 @@ const Image = styled.img`
   object-fit: cover;
   border-radius: 2px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
   opacity: ${({ visible }) => (visible ? 1 : 0)};
   pointer-events: none;
   user-select: none;
+
+  ${Wrapper}:hover & {
+    transform: scale(1.05);
+  }
 `;
 
 const Hint = styled.div`

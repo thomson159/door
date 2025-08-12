@@ -5,10 +5,11 @@ import SEO from "../components/seo";
 import BG from "../components/bg";
 import { useTranslation } from "react-i18next";
 import "../i18n";
-import photo3 from "../images/IMG5.jpg";
-import photo1 from "../images/IMG1.jpg";
-import photo2 from "../images/IMG2.jpg";
-import photo4 from "../images/IMG4.jpg";
+import photo1 from "../images/img1_optimized.jpg";
+import photo2 from "../images/img2_optimized.jpg";
+import photo3 from "../images/img3_optimized.jpg";
+import photo5 from "../images/img5_optimized.jpg";
+import photo6 from "../images/img6_optimized.jpg";
 import ImageSwitcher from "../components/ImageSwitcher";
 import emailjs from "@emailjs/browser";
 import ModelScene from "../components/ModelScene";
@@ -99,10 +100,6 @@ const StyledItemRow = styled.div`
 
   margin-bottom: 2rem;
   margin-top: 2rem;
-
-  // & > *:not(:first-of-type) {
-  //   margin-top: 12px;
-  // }
 
   @media (min-width: 961px) {
     flex-direction: row;
@@ -291,6 +288,17 @@ const StyledSection = styled.section`
   margin-bottom: 2.5rem;
 `;
 
+const StyledDiv = styled.div`
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 2rem;
+  width: 100%;
+  max-width: 650px;
+  margin: 4rem auto;
+  text-align: center;
+`;
+
 const EcosystemSection = () => {
   const { t } = useTranslation();
 
@@ -299,10 +307,10 @@ const EcosystemSection = () => {
       <StyledItemRow>
         <StyledItemColumn>
           <ImageSwitcher
-            img1={photo4}
-            img2={photo3}
-            title1={"polished | raw"}
-            title2={"raw"}
+            images={[
+              { src: photo1, title: t("row") },
+              { src: photo2, title: t("polished") },
+            ]}
           />
         </StyledItemColumn>
         <StyledItemColumn>
@@ -323,33 +331,18 @@ const EcosystemSection = () => {
             {t("ecosystem.title_5")}
           </div>
           <div>{t("ecosystem.tech_1")}</div>
-          {/* <div style={{ marginTop: 14 }}>{t("37g")}</div> */}
         </StyledItemColumn>
         <StyledItemColumn>
           <ImageSwitcher
-            img1={photo2}
-            img2={photo1}
-            title1={"raw"}
-            title2={"raw"}
+            images={[
+              { src: photo3, title: t("polished") },
+              { src: photo5, title: t("polished") },
+              { src: photo6, title: t("polished") },
+            ]}
           />
         </StyledItemColumn>
       </StyledItemRow>
-
-      <div
-        style={{
-          boxShadow: "0 0 20px rgba(0, 0, 0, 0.4)",
-          paddingLeft: "2rem",
-          paddingRight: "2rem",
-          width: "100%",
-          maxWidth: "650px",
-          paddingBottom: "2rem",
-          marginLeft: "auto",
-          marginRight: "auto",
-          marginTop: "4rem",
-          marginBottom: "4rem",
-          textAlign: "center",
-        }}
-      >
+      <StyledDiv>
         <StyledSectionHeader>
           <div style={{ fontSize: 28 }}>219 PLN - 69 USD - 59 EUR</div>
           {t("setPriceHeader")}
@@ -359,7 +352,7 @@ const EcosystemSection = () => {
           {t("shippingPoland")}
         </StyledSectionHeader>
         {t("shippingAbroad")}
-      </div>
+      </StyledDiv>
     </StyledSection>
   );
 };
@@ -432,7 +425,7 @@ const ContactSection = ({ language }) => {
   return (
     <Element name="kontakt">
       <StyledSection>
-        <StyledItemRow>
+        <StyledItemRow style={{ marginTop: "5rem", marginBottom: "5rem" }}>
           <StyledItemColumn
             style={{ minWidth: "255px", width: "auto", marginBottom: "2rem" }}
           >
@@ -452,7 +445,7 @@ const ContactSection = ({ language }) => {
                 </span>
               </StyledBodySubTitleZero>
             )}
-            <form ref={form} onSubmit={sendEmail}>
+            <form ref={form} onSubmit={sendEmail} style={{ margin: 0 }}>
               <StyledInput
                 required={true}
                 type="email"
