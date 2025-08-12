@@ -11,7 +11,8 @@ const menu = [
   },
   {
     name: "Allegro",
-    link: "https://allegro.pl/",
+    link:
+      "https://allegrolokalnie.pl/oferta/dlugopis-z-prawdziwej-luski-243-caliber-recznie-robiony-unikat",
     target: "_blank",
   },
 ];
