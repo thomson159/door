@@ -6,6 +6,20 @@ import BG from "../components/bg";
 import SEO from "../components/seo";
 import "../i18n";
 
+const PopupProducts = styled.div`
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  width: 100%;
+  overflow-y: auto;
+  text-align: center;
+  color: black;
+
+  @media (max-width: 640px) {
+    padding: 0px;
+  }
+`;
+
 const Popup = styled.div`
   position: fixed;
   top: 50%;
@@ -14,26 +28,13 @@ const Popup = styled.div`
   background: white;
   padding: 2rem;
   border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  // box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
   width: 100%;
   max-width: 1400px;
-  //   max-height: 65vh;
+  max-height: 65vh;
   overflow-y: auto;
   text-align: center;
-  color: black; /* tekst zawsze czarny */
-  animation: fadeIn 0.4s ease;
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translate(-50%, -45%);
-    }
-    to {
-      opacity: 1;
-      transform: translate(-50%, -50%);
-    }
-  }
-
+  color: black;
   @media (max-width: 640px) {
     padding: 0px;
   }
@@ -62,8 +63,9 @@ const Button = styled.button`
   border: none;
   border-radius: 10px;
   font-size: 1rem;
-  background: linear-gradient(135deg, #3498db, #2ecc71);
+  background: linear-gradient(135deg, rgb(23, 130, 253), rgb(97, 171, 255));
   color: white;
+
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -158,8 +160,8 @@ const OrderColumn = styled.div`
 const CategoriesColumn = styled.div`
   padding-top: 20px;
   flex: 1;
-  //   border-left: 1px solid #ddd;
-  padding-left: 1rem;
+  // border-left: 1px solid #ddd;
+  // padding-left: 1rem;
   max-height: 70vh;
   overflow-y: auto;
   text-align: left;
@@ -174,7 +176,7 @@ const CartPopup = styled.div`
   max-width: 90%;
   height: 100vh;
   background: white;
-  border-left: 2px solid #ddd;
+  // border-left: 2px solid #ddd;
   padding: 2rem;
   overflow-y: auto;
   box-shadow: -8px 0 30px rgba(0, 0, 0, 0.2);
@@ -200,7 +202,7 @@ const ProductGrid = styled.div`
 
 const ProductCard = styled.div`
   background: #fff;
-  border: 2px solid ${(props) => (props.selected ? "#2ecc71" : "#ddd")};
+  border: 2px solid ${(props) => (props.selected ? "#2ecc71" : "white")};
   border-radius: 12px;
   padding: 1rem;
   text-align: center;
@@ -534,13 +536,14 @@ const Shop = (props) => {
       //   style={{ minHeight: "75vh" }}
       >
         {loggedInEmail && (
-          <>
+          <div style={{ width: "100%", marginBottom: 20 }}>
             <Button
               style={{
                 float: "left",
                 maxWidth: 32,
                 marginTop: 0,
                 marginLeft: 20,
+                marginRight: 20,
               }}
               onClick={() => {
                 if (showOrders) {
@@ -555,11 +558,11 @@ const Shop = (props) => {
                 }
               }}
             >
-              🧑
+              ⚙️
             </Button>
             <Button
               style={{
-                float: "left",
+                // float: "left",
                 maxWidth: 90,
                 marginTop: 0,
                 marginLeft: 20,
@@ -574,7 +577,7 @@ const Shop = (props) => {
             >
               🛒 {cart.length}
             </Button>
-          </>
+          </div>
         )}
       </div>
       {!loggedInEmail && (
@@ -629,7 +632,7 @@ const Shop = (props) => {
                 <tbody>
                   {cart.map((item) => (
                     <tr key={item.id}>
-                      <Td>{item.title}</Td>
+                      <Td>{item.title.slice(0, 24)}</Td>
                       <Td>{item.price} zł</Td>
                       <Td style={{ width: 78 }}>
                         <input
@@ -695,7 +698,7 @@ const Shop = (props) => {
         </Popup>
       )}
       {showProducts && (
-        <Popup style={{ paddingBottom: "2rem" }}>
+        <PopupProducts style={{ paddingBottom: "2rem" }}>
           <Button
             style={{ maxWidth: 28, margin: 0 }}
             onClick={closeProductsPopup}
@@ -721,27 +724,12 @@ const Shop = (props) => {
                       <ProductImage src={product.image} alt={product.title} />
                       <ProductTitle>{product.title}</ProductTitle>
                       <ProductPrice>{product.price} zł</ProductPrice>
-                      <ProductDescription>
+                      {/* <ProductDescription>
                         {product.description}
-                      </ProductDescription>
+                      </ProductDescription> */}
                     </ProductCard>
                   ))}
                 </ProductGrid>
-                <Button
-                  style={{
-                    float: "left",
-                    maxWidth: 120,
-                  }}
-                  onClick={() => {
-                    if (showCart === false) {
-                      setShowCart(true);
-                    } else {
-                      setShowCart(false);
-                    }
-                  }}
-                >
-                  🛒 Zamów
-                </Button>
               </>
             )}
           </ProductsColumn>
@@ -762,10 +750,10 @@ const Shop = (props) => {
               ))}
             </CategoriesColumn>
           )}
-        </Popup>
+        </PopupProducts>
       )}
       {showOrders && (
-        <Popup>
+        <PopupProducts>
           <Button
             style={{ maxWidth: 28, margin: 0 }}
             onClick={closeOrdersPopup}
@@ -818,7 +806,7 @@ const Shop = (props) => {
               </Table>
             )}
           </OrderColumn>
-        </Popup>
+        </PopupProducts>
       )}
     </Layout>
   );

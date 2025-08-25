@@ -1,5 +1,7 @@
 # Symbol of transforming weapons into words
 
+## node: >= v20.18.1
+
 Based on the source code of the [uniswap.org](https://uniswap.org) homepage ([GPL-3.0 license](https://github.com/Uniswap/org-v1/blob/main/LICENSE)).
 
 Improved version of the [web2app.app](https://web2app.app) project, simplified code, better SEO, fixed navigation bar in the mobile version, different smooth scrolling, added 3D model and translation.
@@ -65,15 +67,3 @@ contact@243pen.store
 
 [Uniswap team](https://github.com/Uniswap/org-v1)
 [@thomson159](https://github.com/thomson159)
-
-## Set product to db - .243 example
-
-INSERT INTO products (id, title, price, category, description, image)
-VALUES
-(1, 'Długopis (P)', 219, 'Polerowany', 'Wersja z łuskami wypolerowanymi na wysoki połysk, nadającymi całości elegancki i ekskluzywny wygląd.', 'https://243pen.store/static/img2_optimized-283f56cdd105a811ecb5561f5a0499db.jpg')
-ON CONFLICT (id) DO NOTHING;
-
-INSERT INTO products (id, title, price, category, description, image)
-VALUES
-(2, 'Długopis (N)', 219, 'Niepolerowany', 'Naturalne, niepolerowane łuski, które zachowują oryginalny charakter i ślady użycia.', 'https://243pen.store/static/img1_optimized-81bc76d91e61c71417587244b5b31145.jpg')
-ON CONFLICT (id) DO NOTHING;
