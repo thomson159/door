@@ -255,7 +255,7 @@ const Cart = () => {
       <CartPopup className={visible ? "visible" : ""}>
         <CloseButton onClick={() => setVisible(false)}>X</CloseButton>
 
-        <h2>Twój koszyk</h2>
+        <h2 style={{ width: "100%", textAlign: "center" }}>Twój koszyk</h2>
 
         <Table>
           <thead>
@@ -307,11 +307,20 @@ const Cart = () => {
           </div>
         )}
 
-        <h2 style={{ marginTop: 40, marginBottom: 0 }}>Dane do wysyłki</h2>
+        <h2
+          style={{
+            marginTop: 40,
+            marginBottom: 0,
+            width: "100%",
+            textAlign: "center",
+          }}
+        >
+          Dane do wysyłki
+        </h2>
 
         <form onSubmit={handleSubmit}>
           <FormRow>
-            <Column>
+            <Column style={{ maxWidth: "140px" }}>
               <Label htmlFor="country">Kraj</Label>
               <span style={{ fontSize: 10 }}>wybierz</span>
               <Select
