@@ -16,7 +16,7 @@ const pulse = keyframes`
 `;
 
 export const StyledTradeButton = styled.button`
-  max-width: 200px;
+  max-width: 100px;
   height: 40px;
   opacity: ${({ disabled }) => (disabled ? "0.8" : "1")};
   font-size: 18px;
@@ -58,7 +58,6 @@ export const Overlay = styled.div`
 `;
 
 export const CartPopup = styled.div`
-  // background: ${({ theme }) => theme.colors.blackWhite || "#fff"};
   padding: 2rem;
 `;
 
@@ -130,7 +129,6 @@ export const TextArea = styled.textarea`
   width: 100%;
   padding: 8px;
   margin-top: 5px;
-  font-size: 1rem;
   box-sizing: border-box;
 `;
 
@@ -141,10 +139,7 @@ export const Input = styled.input`
   padding: 8px;
   margin-top: 5px;
   border: none;
-  // border-radius: 2px;
-  // border: 1px solid;
-  // border-color: ${({ theme }) => theme.colors.blackWhite || "#fff"};
-  font-size: 1rem;
+  font-size: 14px;
   box-sizing: border-box;
 `;
 
@@ -170,7 +165,6 @@ export const Select = styled.select`
 export const FormRow = styled.div`
   display: flex;
   gap: 1rem;
-  // margin-top: 1rem;
   flex-wrap: wrap;
 `;
 
