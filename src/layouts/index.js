@@ -3,7 +3,7 @@ import Header from "../components/header";
 
 import Footer from "../components/footer";
 import Mdx from "../components/mdx";
-import Cart from "../components/Cart";
+// import Cart from "../components/Cart";
 
 import { StyledThemeProvider } from "../styles/themeManager";
 
@@ -16,7 +16,7 @@ import "../i18n";
 const Layout = ({ children, nofooter }) => {
   return (
     <StyledThemeProvider>
-      <Cart />
+      {/* <Cart /> */}
       <Header />
       <Mdx>{children}</Mdx>
       {nofooter ? null : <Footer />}

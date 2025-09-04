@@ -58,23 +58,8 @@ export const Overlay = styled.div`
 `;
 
 export const CartPopup = styled.div`
-  position: fixed;
-  top: 0;
-  right: 0;
-  // width: 600px;
-  max-width: 90%;
-  height: 100vh;
-  background: ${({ theme }) => theme.colors.blackWhite || "#fff"};
+  // background: ${({ theme }) => theme.colors.blackWhite || "#fff"};
   padding: 2rem;
-  overflow-y: auto;
-  box-shadow: -8px 0 30px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-  transform: translateX(100%);
-  transition: transform 0.4s ease;
-
-  &.visible {
-    transform: translateX(0);
-  }
 `;
 
 export const CloseButton = styled.button`
@@ -136,12 +121,29 @@ export const Button = styled.button`
   }
 `;
 
-export const Input = styled.input`
+export const TextArea = styled.textarea`
+  color: ${({ theme }) => theme.colors.whiteBlack || "#fff"};
+  background: ${({ theme }) => theme.colors.blackWhite || "#fff"};
+  min-height: 100px;
+  padding: 8px;
+  border: none;
   width: 100%;
   padding: 8px;
   margin-top: 5px;
-  border-radius: 2px;
-  border: 1px solid #ddd;
+  font-size: 1rem;
+  box-sizing: border-box;
+`;
+
+export const Input = styled.input`
+  color: ${({ theme }) => theme.colors.whiteBlack || "#fff"};
+  background: ${({ theme }) => theme.colors.blackWhite || "#fff"};
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: none;
+  // border-radius: 2px;
+  // border: 1px solid;
+  // border-color: ${({ theme }) => theme.colors.blackWhite || "#fff"};
   font-size: 1rem;
   box-sizing: border-box;
 `;
@@ -154,6 +156,9 @@ export const Label = styled.label`
 `;
 
 export const Select = styled.select`
+  color: ${({ theme }) => theme.colors.whiteBlack || "#fff"};
+  background: ${({ theme }) => theme.colors.blackWhite || "#fff"};
+  border: none;
   width: 100%;
   padding: 8px;
   margin-top: 5px;
@@ -165,7 +170,7 @@ export const Select = styled.select`
 export const FormRow = styled.div`
   display: flex;
   gap: 1rem;
-  margin-top: 1rem;
+  // margin-top: 1rem;
   flex-wrap: wrap;
 `;
 
@@ -178,7 +183,9 @@ export const Summary = styled.div`
   font-size: 0.8rem;
   margin-top: 1rem;
   padding-top: 1rem;
-  border-top: 1px solid #ddd;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ddd;
   color: #555;
 `;
 

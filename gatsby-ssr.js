@@ -22,11 +22,27 @@ const MagicScriptTag = () => {
       const root = document.documentElement;
       root.style.setProperty('--initial-color-mode', colorMode);
     })();
+
+
+
+    new InPostGeoWidget({
+      element: "inpost-widget",
+      language: "pl",
+      config: { layout: "search" },
+      onSelect: function(point) {
+        console.log(point);
+      }
+    });
   `;
 
   return (
     <>
       <script dangerouslySetInnerHTML={{ __html: colorModeScript }} />
+
+      <script
+        src="https://geowidget.inpost.pl/inpost-geowidget.js"
+        async
+      ></script>
     </>
   );
 };
