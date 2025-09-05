@@ -189,3 +189,11 @@ export const ErrorText = styled.div`
   font-size: 0.8rem;
   margin-top: 4px;
 `;
+
+export const MarginDiv = styled.p`
+  margin-bottom: 4px;
+`;
+
+export const MarginTopDiv = styled.div`
+  margin-top: 14px;
+`;
