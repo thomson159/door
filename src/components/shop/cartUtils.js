@@ -127,7 +127,7 @@ export const validateZip = (zip = "", form = {}, currentCountry) => {
 };
 
 export const validateForm = (form, currentCountry) => {
-  console.log("@@@@", form);
+  // console.log("@@@@", form);
 
   try {
     const hasItems =

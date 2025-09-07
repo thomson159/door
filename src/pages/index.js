@@ -407,7 +407,7 @@ const ContactSection = ({ language }) => {
       (result) => {
         setStatus(result.text);
         setCan(true);
-        console.log(result.text);
+        // console.log(result.text);
         form.current.reset();
       },
       (error) => {

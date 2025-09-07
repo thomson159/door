@@ -69,6 +69,10 @@ const Cart = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem(cartForm);
+
+      // console.log(JSON.parse(saved));
+      // console.log(currentCountry);
+
       if (saved) setForm(JSON.parse(saved));
     }
   }, []);

@@ -1,8 +1,8 @@
-import React from 'react'
+import React from "react";
 
 export default function ExternalRedirect({ href }) {
   React.useEffect(() => {
-    window.location = href
-  }, [])
-  return null
+    window.location = href;
+  }, []);
+  return null;
 }
