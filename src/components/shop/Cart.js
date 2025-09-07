@@ -66,7 +66,7 @@ const Cart = () => {
   const delivery = getDelivery(form);
 
   useEffect(() => {
-    if (typeof window != undefined) {
+    if (typeof window !== "undefined") {
       const saved = localStorage.getItem(cartForm);
       if (saved) setForm(JSON.parse(saved));
     }
@@ -120,14 +120,14 @@ const Cart = () => {
   };
 
   const updateCountry = (name) => {
-    const country =
+    const countryObj =
       countries.find((c) => c.name === name) ||
       countriesInpost.find((c) => c.name === name);
 
-    updateForm(country, name);
-    updateForm(phoneCode, country?.code || "");
-    updateForm(zip, "");
-    setCurrentCountry(country);
+    updateForm("country", name);
+    updateForm("phoneCode", countryObj?.code || "");
+    updateForm("zip", "");
+    setCurrentCountry(countryObj);
   };
 
   const handlePhoneChange = (value) => {
@@ -260,12 +260,12 @@ const Cart = () => {
                     min="0"
                     value={quantity}
                     onChange={(e) => updateQuantity(id, Number(e.target.value))}
-                    style={{ width: "60px" }}
+                    // style={{ width: "60px" }}
                   />
                 </Td>
-                <Td>
+                <Td style={{ paddingRight: 8 }}>
                   <StyledTradeButton
-                    style={{ maxWidth: 70, margin: 0 }}
+                    style={{ maxWidth: 70, margin: 0, maxWidth: "100%" }}
                     onClick={() => updateQuantity(id, 0)}
                   >
                     {t("remove")}
@@ -297,16 +297,16 @@ const Cart = () => {
         <label style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <input
             type="radio"
-            name={deliveryMethod}
+            name="deliveryMethod"
             value={KURIER}
             checked={form.deliveryMethod === KURIER}
             onChange={(e) => {
-              updateForm(country, POLAND);
-              updateForm(phoneCode, "+48");
-              updateForm(deliveryMethod, e.target.value);
+              updateForm("country", POLAND);
+              updateForm("phoneCode", "+48");
+              updateForm("deliveryMethod", e.target.value);
             }}
           />
-          🇵🇱 {delivery2}
+          🇵🇱 {t(delivery2)}
         </label>
         {/* <label style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <input
@@ -325,16 +325,16 @@ const Cart = () => {
         <label style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <input
             type="radio"
-            name={deliveryMethod}
+            name={"deliveryMethod"}
             value={KURIER_2}
             checked={form.deliveryMethod === KURIER_2}
             onChange={(e) => {
-              updateForm(country, "France");
-              updateForm(phoneCode, "+33");
-              updateForm(deliveryMethod, e.target.value);
+              updateForm("country", "France");
+              updateForm("phoneCode", "+33");
+              updateForm("deliveryMethod", e.target.value);
             }}
           />
-          🇫🇷🇧🇪🇱🇺🇪🇸🇵🇹🇮🇹 {delivery3}
+          🇫🇷🇧🇪🇱🇺🇪🇸🇵🇹🇮🇹 {t(delivery3)}
         </label>
         {/* <label style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <input
@@ -353,12 +353,12 @@ const Cart = () => {
         <label style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <input
             type="radio"
-            name={deliveryMethod}
+            name={"deliveryMethod"}
             value={KURIER_3}
             checked={form.deliveryMethod === KURIER_3}
-            onChange={(e) => updateForm(deliveryMethod, e.target.value)}
+            onChange={(e) => updateForm("deliveryMethod", e.target.value)}
           />
-          🌍 {delivery5}
+          🌍 {t(delivery5)}
         </label>
         <Summary style={{ marginTop: 16 }}>
           <div>
@@ -395,8 +395,10 @@ const Cart = () => {
             placeholder={t("fullname_placeholder")}
             required={true}
           />
-          {getInputError(name, form, currentCountry) && (
-            <ErrorText>{getInputError(name, form, currentCountry)}</ErrorText>
+          {getInputError(t, name, form, currentCountry) && (
+            <ErrorText>
+              {getInputError(t, name, form, currentCountry)}
+            </ErrorText>
           )}
           {![KURIER].includes(form.deliveryMethod) && (
             <>
@@ -440,9 +442,9 @@ const Cart = () => {
                 style={getInputStyle(zip, form, currentCountry)}
                 required={true}
               />
-              {getInputError(zip, form, currentCountry) && (
+              {getInputError(t, zip, form, currentCountry) && (
                 <ErrorText>
-                  {getInputError(zip, form, currentCountry)}
+                  {getInputError(t, zip, form, currentCountry)}
                 </ErrorText>
               )}
               <FormRow>
@@ -458,9 +460,9 @@ const Cart = () => {
                     placeholder={t("city_placeholder")}
                     required={true}
                   />
-                  {getInputError(city, form, currentCountry) && (
+                  {getInputError(t, city, form, currentCountry) && (
                     <ErrorText>
-                      {getInputError(city, form, currentCountry)}
+                      {getInputError(t, city, form, currentCountry)}
                     </ErrorText>
                   )}
                 </Column>
@@ -476,9 +478,9 @@ const Cart = () => {
                     placeholder={t("street_placeholder")}
                     required={true}
                   />
-                  {getInputError(street, form, currentCountry) && (
+                  {getInputError(t, street, form, currentCountry) && (
                     <ErrorText>
-                      {getInputError(street, form, currentCountry)}
+                      {getInputError(t, street, form, currentCountry)}
                     </ErrorText>
                   )}
                 </Column>
@@ -516,9 +518,9 @@ const Cart = () => {
                 placeholder={form.country === POLAND ? "np. 123456789" : "6-11"}
                 required={true}
               />
-              {getInputError(phone, form, currentCountry) && (
+              {getInputError(t, phone, form, currentCountry) && (
                 <ErrorText>
-                  {getInputError(phone, form, currentCountry)}
+                  {getInputError(t, phone, form, currentCountry)}
                 </ErrorText>
               )}
             </Column>
@@ -534,8 +536,10 @@ const Cart = () => {
             placeholder={t("email_placeholder")}
             required={true}
           />
-          {getInputError(email, form, currentCountry) && (
-            <ErrorText>{getInputError(email, form, currentCountry)}</ErrorText>
+          {getInputError(t, email, form, currentCountry) && (
+            <ErrorText>
+              {getInputError(t, email, form, currentCountry)}
+            </ErrorText>
           )}
           <Label htmlFor={additionalInfo}>{t("additional_info")}</Label>
           <TextArea
@@ -567,7 +571,7 @@ const Cart = () => {
                       `${delivery1}: ${form.lockerId}`}
                     {form.deliveryMethod === "PACZKOMAT_2" &&
                       `${delivery4}: ${form.lockerId}`} */}
-                    {deliveryMethod}
+                    {t(deliveryMethod)}
                   </MarginDiv>
                   <MarginDiv>
                     <strong>{t("receiver")}:</strong> {form.name}

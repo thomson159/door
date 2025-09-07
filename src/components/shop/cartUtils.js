@@ -19,14 +19,15 @@ export const name = "name";
 export const phoneCode = "phoneCode";
 export const country = "country";
 export const cartForm = "cartForm";
-export const info = `Czy masz pewność, że wszystkie informacje są poprawne? Kliknij OK, aby przejść do płatności.`;
-export const validInfo = "Musi zawierać co najmniej jedną literę.";
-export const validPhone = "Telefon musi mieć dokładnie 9 cyfr.";
-export const validPhone2 = "Telefon musi mieć od 6 do 11 cyfr.";
-export const validEmail = "Podaj poprawny adres email.";
-export const cyfry = " (cyfry #)";
 export const deliveryMethod = "deliveryMethod";
 export const additionalInfo = "additionalInfo";
+
+export const info = `Czy masz pewność, że wszystkie informacje są poprawne? Kliknij OK, aby przejść do płatności.`;
+export const validPhone = "Telefon musi mieć dokładnie 9 cyfr.";
+export const validPhone2 = "Telefon musi mieć od 6 do 11 cyfr.";
+export const cyfry = " (cyfry #)";
+export const validEmail = "Podaj poprawny adres email.";
+export const validInfo = "Musi zawierać co najmniej jedną literę.";
 
 export const hasLetter = (str) => /[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]/.test(str);
 export const allowedNameRegex = /^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ0-9\s',./-]*$/;
@@ -55,6 +56,7 @@ export const emptyForm = {
   email: "",
   additionalInfo: "",
   deliveryMethod: KURIER,
+
   locker: {
     name: "",
     address: "",
@@ -76,50 +78,66 @@ export const poland = {
   postalRegex: "^\\d{2}-\\d{3}$",
 };
 
-export const validateEmail = (email) => {
-  const lastChar = email[email.length - 1];
-  return emailRegex.test(email) && !/[^a-zA-Z0-9]/.test(lastChar);
-};
-
-export const validatePhone = (phone, form) => {
-  const length = phone.length;
-  if (!/^[0-9]+$/.test(phone)) return false;
-  return form.country === POLAND ? length === 9 : length >= 6 && length <= 11;
-};
-
-export const validateZip = (zip, form, currentCountry) => {
-  if (!zip) return false;
-
-  let country = poland;
-
-  if (form.deliveryMethod === KURIER_3 || form.deliveryMethod === KURIER_2) {
-    country = currentCountry;
+export const validateEmail = (email = "") => {
+  try {
+    if (!email || typeof email !== "string") return false;
+    const lastChar = email[email.length - 1];
+    return emailRegex.test(email) && /[a-zA-Z0-9]/.test(lastChar);
+  } catch {
+    return false;
   }
-
-  if (!country || !country.postalRegex) return true;
-
-  const regex = new RegExp(country.postalRegex);
-  return regex.test(zip.trim());
 };
 
-export const validateForm = (form, currentCountry) => {
-  // if (form.deliveryMethod === "PACZKOMAT") {
-  //   return form.lockerId?.trim() !== "";
-  // }
+export const validatePhone = (phone = "", form = {}) => {
+  try {
+    if (!phone || typeof phone !== "string") return false;
+    const digits = phone.replace(/\s+/g, "");
+    if (!/^[0-9]+$/.test(digits)) return false;
+    const length = digits.length;
+    return form.country === POLAND ? length === 9 : length >= 6 && length <= 11;
+  } catch {
+    return false;
+  }
+};
 
-  const hasItems = cart.some((item) => item.quantity > 0);
+export const validateZip = (zip = "", form = {}, currentCountry) => {
+  try {
+    if (!zip || typeof zip !== "string") return false;
 
-  return (
-    hasItems &&
-    street.trim() &&
-    city.trim() &&
-    hasLetter(street) &&
-    hasLetter(city) &&
-    validateZip(zip, form, currentCountry) &&
-    validatePhone(phone, form) &&
-    validateEmail(email) &&
-    name.trim()
-  );
+    let country = poland;
+    if (form.deliveryMethod === KURIER_3 || form.deliveryMethod === KURIER_2) {
+      country = currentCountry;
+    }
+
+    if (!country || !country.postalRegex) return true;
+
+    const regex = new RegExp(country.postalRegex);
+    return regex.test(zip.trim());
+  } catch {
+    return false;
+  }
+};
+
+export const validateForm = (form = {}, currentCountry) => {
+  try {
+    const hasItems =
+      (Array.isArray(form.cart) && form.cart.some((i) => i.quantity > 0)) ||
+      (Array.isArray(products) && products.some((i) => i.quantity > 0));
+
+    return (
+      hasItems &&
+      !!form.street?.trim() &&
+      !!form.city?.trim() &&
+      hasLetter(form.street) &&
+      hasLetter(form.city) &&
+      validateZip(form.zip, form, currentCountry) &&
+      validatePhone(form.phone, form) &&
+      validateEmail(form.email) &&
+      !!form.name?.trim()
+    );
+  } catch {
+    return false;
+  }
 };
 
 export const getSummary = (cart) =>
@@ -138,8 +156,13 @@ export const getDeliveryMethod = (form) =>
   (form.deliveryMethod === KURIER_3 && delivery5) ||
   "";
 
-export const parseDelivery = (str, index = 2) =>
-  parseFloat(str.split(" ")[index].replace(",", "."));
+export const parseDelivery = (str, index = 2) => {
+  try {
+    return parseFloat(str.split(" ")[index].replace(",", "."));
+  } catch {
+    return 0;
+  }
+};
 
 export const getDelivery = (form) =>
   form.deliveryMethod === "PACZKOMAT"
@@ -154,28 +177,50 @@ export const getDelivery = (form) =>
     ? parseDelivery(delivery5, 1)
     : 0;
 
-export const getInputError = (field, form, currentCountry) => {
-  if (field === street && street.trim() && !hasLetter(street)) return validInfo;
-  if (field === city && city.trim() && !hasLetter(city)) return validInfo;
-  if (field === phone && phone && !validatePhone(phone, form))
-    return form.country === POLAND ? validPhone : validPhone2;
-  if (field === email && email && !validateEmail(email)) return validEmail;
-  if (field === zip && zip && !validateZip(zip, form, currentCountry))
-    return currentCountry?.name + " " + currentCountry?.postalFormat + cyfry;
-  if (field === name && name.trim() && !hasLetter(name)) return validInfo;
+export const getInputError = (t, field, form = {}, currentCountry) => {
+  try {
+    const f = String(field);
 
-  return "";
+    if (f === "street" && form.street?.trim() && !hasLetter(form.street))
+      return t(validInfo);
+    if (f === "city" && form.city?.trim() && !hasLetter(form.city))
+      return t(validInfo);
+    if (f === "phone" && form.phone && !validatePhone(form.phone, form))
+      return form.country === POLAND ? t(validPhone) : t(validPhone2);
+    if (f === "email" && form.email && !validateEmail(form.email))
+      return t(validEmail);
+    if (f === "zip" && form.zip && !validateZip(form.zip, form, currentCountry))
+      return (
+        (currentCountry?.name || "") +
+        " " +
+        (currentCountry?.postalFormat || "") +
+        t(cyfry)
+      );
+    if (f === "name" && form.name?.trim() && !hasLetter(form.name))
+      return t(validInfo);
+
+    return "";
+  } catch {
+    return "";
+  }
 };
 
-export const getInputStyle = (field, form, currentCountry) => {
-  let isValid = true;
-  if (field === street) isValid = form.street.trim() && hasLetter(form.street);
-  if (field === city) isValid = form.city.trim() && hasLetter(form.city);
-  if (field === zip) isValid = validateZip(form.zip, form, currentCountry);
-  if (field === phone) isValid = validatePhone(form.phone, form);
-  if (field === email) isValid = validateEmail(form.email);
-  if (field === name)
-    isValid = form.name?.trim() && allowedNameRegex.test(form.name);
+export const getInputStyle = (field, form = {}, currentCountry) => {
+  try {
+    const f = String(field);
+    let isValid = true;
 
-  return { borderColor: isValid ? "#ddd" : "red" };
+    if (f === "street")
+      isValid = !!form.street?.trim() && hasLetter(form.street);
+    if (f === "city") isValid = !!form.city?.trim() && hasLetter(form.city);
+    if (f === "zip") isValid = validateZip(form.zip, form, currentCountry);
+    if (f === "phone") isValid = validatePhone(form.phone, form);
+    if (f === "email") isValid = validateEmail(form.email);
+    if (f === "name")
+      isValid = !!form.name?.trim() && allowedNameRegex.test(form.name);
+
+    return { borderColor: isValid ? "#ddd" : "red" };
+  } catch {
+    return { borderColor: "red" };
+  }
 };

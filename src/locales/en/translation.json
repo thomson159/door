@@ -79,6 +79,18 @@
   "privacy_policy": "Privacy policy",
   "pay": "Pay",
 
+  "Paczkomat InPost 16,99 zł": "InPost Parcel Locker 16.99 zł",
+  "Kurier InPost 1 zł": "InPost Courier 1 zł",
+  "Kurier InPost 28,99 zł": "InPost Courier 28.99 zł",
+  "Paczkomat InPost 49,99 zł": "PInPost Parcel Locker 49.99 zł",
+  "Kurier 69,99 zł": "Courier 69.99 zł",
+  "Podaj poprawny adres email.": "Please enter a valid email address.",
+  "Musi zawierać co najmniej jedną literę.": "Must contain at least one letter.",
+  "Czy masz pewność, że wszystkie informacje są poprawne? Kliknij OK, aby przejść do płatności.": "Are you sure all information is correct? Click OK to proceed to payment.",
+  "Telefon musi mieć dokładnie 9 cyfr.": "Phone number must be exactly 9 digits.",
+  "Telefon musi mieć od 6 do 11 cyfr.": "Phone number must be between 6 and 11 digits.",
+  " (cyfry #)": " (digits #)",
+
   "privacy.2": "Last modified: July 27, 2025",
   "privacy.3": "This Privacy Policy (the “Policy”) explains how collects, uses, and shares data in connection with the website and services (the “Services”). Your use of the Services is subject to this Policy.",
   "privacy.4": "High Level Summary",
