@@ -50,6 +50,7 @@ import {
   additionalInfo,
   getInputStyle,
   validateForm,
+  france,
 } from "./cartUtils";
 import { countriesInpost } from "./countries";
 import { useTranslation } from "react-i18next";
@@ -155,9 +156,6 @@ const Cart = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!validateForm(form, currentCountry)) return;
-
     const order = {
       name: form.name,
       country: form.country,
@@ -188,42 +186,74 @@ const Cart = () => {
       });
     }
 
+    e.preventDefault();
+    if (!validateForm({ ...form, products: order.products }, currentCountry))
+      return;
+
     if (window.confirm(info)) {
       console.log("Zamówienie złożone", order);
     }
+
+    // alert(order);
+  };
+
+  const zipMasks = {
+    [POLAND]: "##-###",
+    ["Portugal"]: "####-###",
+    ["Netherlands"]: "#### @@",
   };
 
   const handleZipChange = (value) => {
-    console.log(currentCountry);
-
-    if (form.country === POLAND) {
-      let digits = value.replace(/[^0-9-]/g, "");
-
-      const dashIndex = digits.indexOf("-");
-      if (dashIndex !== -1 && dashIndex < 2) {
-        digits = digits.replace("-", "");
+    const mask = zipMasks[form.country];
+    if (!mask) {
+      const allowedCharsRegex = zipRegexMap[form.country] || defaultRegex;
+      if (allowedCharsRegex.test(value)) {
+        updateForm(zip, value.toUpperCase());
       }
-
-      const parts = digits.split("-");
-      if (parts.length > 2) {
-        digits = parts[0] + "-" + parts[1].slice(0, 3);
-      } else if (parts.length === 2) {
-        digits = parts[0].slice(0, 2) + "-" + parts[1].slice(0, 3);
-      }
-
-      if (!digits.includes("-") && digits.length > 2) {
-        digits = digits.slice(0, 2) + "-" + digits.slice(2, 5);
-      }
-
-      updateForm(zip, digits.toUpperCase());
       return;
     }
 
-    const allowedCharsRegex = zipRegexMap[form.country] || defaultRegex;
+    let raw = value.toUpperCase().replace(/[^0-9A-Z -]/g, "");
+    let formatted = "";
+    let rawIndex = 0;
 
-    if (allowedCharsRegex.test(value)) {
-      updateForm(zip, value.toUpperCase());
+    for (let i = 0; i < mask.length && rawIndex < raw.length; i++) {
+      const m = mask[i];
+      const c = raw[rawIndex];
+
+      if (m === "#") {
+        if (/[0-9]/.test(c)) {
+          formatted += c;
+          rawIndex++;
+        }
+      } else if (m === "@") {
+        if (/[A-Z]/.test(c)) {
+          formatted += c;
+          rawIndex++;
+        }
+      } else {
+        // separator z maski
+        if (formatted.length === i) {
+          // separator jest dokładnie teraz na pozycji maski
+          if (c === m) {
+            // user sam wpisał
+            formatted += c;
+            rawIndex++;
+          } else {
+            // user nie wpisał -> dodaj automatycznie
+            formatted += m;
+          }
+        } else {
+          // jeśli separator w złym miejscu -> ignorujemy
+          if (c === "-" || c === " ") {
+            rawIndex++;
+            i--; // spróbuj ponownie ten sam znak maski
+          }
+        }
+      }
     }
+
+    updateForm(zip, formatted);
   };
 
   const handleNameChange = (value) => {
@@ -238,7 +268,7 @@ const Cart = () => {
 
   return (
     <>
-      <CartPopup>
+      <CartPopup style={{ marginBottom: 200 }}>
         <h2 style={{ width: "100%", textAlign: "center" }}>{t("cart")}</h2>
         <Table>
           <thead>
@@ -304,6 +334,8 @@ const Cart = () => {
               updateForm("country", POLAND);
               updateForm("phoneCode", "+48");
               updateForm("deliveryMethod", e.target.value);
+              setCurrentCountry(poland);
+              updateForm("zip", "");
             }}
           />
           🇵🇱 {t(delivery2)}
@@ -332,6 +364,8 @@ const Cart = () => {
               updateForm("country", "France");
               updateForm("phoneCode", "+33");
               updateForm("deliveryMethod", e.target.value);
+              setCurrentCountry(france);
+              updateForm("zip", "");
             }}
           />
           🇫🇷🇧🇪🇱🇺🇪🇸🇵🇹🇮🇹 {t(delivery3)}
@@ -356,7 +390,10 @@ const Cart = () => {
             name={"deliveryMethod"}
             value={KURIER_3}
             checked={form.deliveryMethod === KURIER_3}
-            onChange={(e) => updateForm("deliveryMethod", e.target.value)}
+            onChange={(e) => {
+              updateForm("deliveryMethod", e.target.value);
+              updateForm("zip", "");
+            }}
           />
           🌍 {t(delivery5)}
         </label>

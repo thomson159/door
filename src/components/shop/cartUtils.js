@@ -56,14 +56,15 @@ export const emptyForm = {
   email: "",
   additionalInfo: "",
   deliveryMethod: KURIER,
+  products: [],
 
-  locker: {
-    name: "",
-    address: "",
-    city: "",
-    zip: "",
-    locationDescription: "",
-  },
+  // locker: {
+  //   name: "",
+  //   address: "",
+  //   city: "",
+  //   zip: "",
+  //   locationDescription: "",
+  // },
 };
 
 export const products = [
@@ -76,6 +77,13 @@ export const poland = {
   code: "+48",
   postalFormat: "##-###",
   postalRegex: "^\\d{2}-\\d{3}$",
+};
+
+export const france = {
+  name: "France",
+  code: "+33",
+  postalFormat: "#####",
+  postalRegex: "^\\d{5}$",
 };
 
 export const validateEmail = (email = "") => {
@@ -118,13 +126,14 @@ export const validateZip = (zip = "", form = {}, currentCountry) => {
   }
 };
 
-export const validateForm = (form = {}, currentCountry) => {
+export const validateForm = (form, currentCountry) => {
+  console.log("@@@@", form);
+
   try {
     const hasItems =
-      (Array.isArray(form.cart) && form.cart.some((i) => i.quantity > 0)) ||
-      (Array.isArray(products) && products.some((i) => i.quantity > 0));
+      Array.isArray(form.products) && form.products.some((i) => i.quantity > 0);
 
-    return (
+    const x =
       hasItems &&
       !!form.street?.trim() &&
       !!form.city?.trim() &&
@@ -133,8 +142,11 @@ export const validateForm = (form = {}, currentCountry) => {
       validateZip(form.zip, form, currentCountry) &&
       validatePhone(form.phone, form) &&
       validateEmail(form.email) &&
-      !!form.name?.trim()
-    );
+      !!form.name?.trim();
+
+    // console.log(hasItems);
+
+    return x;
   } catch {
     return false;
   }
