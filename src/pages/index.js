@@ -394,14 +394,16 @@ const ContactSection = ({ language }) => {
   const [can, setCan] = useState(true);
   const { t, i18n } = useTranslation();
 
-  const sendEmail = (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault();
     setCan(false);
     setStatus("");
 
-    const SERVICE = process.env.GATSBY_SERVICE;
-    const TEMPLATE = process.env.GATSBY_TEMPLATE;
-    const KEY = process.env.GATSBY_KEY;
+    const SERVICE = await process.env.GATSBY_SERVICE;
+    const TEMPLATE = await process.env.GATSBY_TEMPLATE;
+    const KEY = await process.env.GATSBY_KEY;
+
+    console.log(KEY);
 
     emailjs.sendForm(SERVICE, TEMPLATE, form.current, KEY).then(
       (result) => {

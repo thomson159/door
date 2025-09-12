@@ -68,17 +68,15 @@ const Cart = () => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const saved = localStorage.getItem(cartForm);
-
+      // const saved = localStorage.getItem(cartForm);
       // console.log(JSON.parse(saved));
       // console.log(currentCountry);
-
-      if (saved) setForm(JSON.parse(saved));
+      // if (saved) setForm(JSON.parse(saved));
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem(cartForm, JSON.stringify(form));
+    // localStorage.setItem(cartForm, JSON.stringify(form));
   }, [form]);
 
   useEffect(() => {
@@ -556,7 +554,7 @@ const Cart = () => {
                 onChange={(e) => handlePhoneChange(e.target.value)}
                 maxLength={form.country === POLAND ? 9 : 11}
                 style={getInputStyle(phone, form, currentCountry)}
-                placeholder={form.country === POLAND ? "np. 123456789" : "6-11"}
+                placeholder={form.country === POLAND ? "123456789" : "6-11"}
                 required={true}
               />
               {getInputError(t, phone, form, currentCountry) && (
