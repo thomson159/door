@@ -27,6 +27,11 @@ const MagicScriptTag = () => {
   return (
     <>
       <script dangerouslySetInnerHTML={{ __html: colorModeScript }} />
+
+      {/* <script
+        src="https://geowidget.inpost.pl/inpost-geowidget.js"
+        async
+      ></script> */}
     </>
   );
 };

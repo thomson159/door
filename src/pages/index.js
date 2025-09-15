@@ -344,14 +344,14 @@ const EcosystemSection = () => {
       </StyledItemRow>
       <StyledDiv>
         <StyledSectionHeader>
-          <div style={{ fontSize: 28 }}>219 PLN - 69 USD - 59 EUR</div>
+          <div style={{ fontSize: 28 }}>219 PLN</div>
           {t("setPriceHeader")}
         </StyledSectionHeader>
         {t("setContents")}
-        <StyledSectionHeader style={{ marginBottom: 0 }}>
+        {/* <StyledSectionHeader style={{ marginBottom: 0 }}>
           {t("shippingPoland")}
         </StyledSectionHeader>
-        {t("shippingAbroad")}
+        {t("shippingAbroad")} */}
       </StyledDiv>
     </StyledSection>
   );
@@ -394,20 +394,22 @@ const ContactSection = ({ language }) => {
   const [can, setCan] = useState(true);
   const { t, i18n } = useTranslation();
 
-  const sendEmail = (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault();
     setCan(false);
     setStatus("");
 
-    const SERVICE = process.env.GATSBY_SERVICE;
-    const TEMPLATE = process.env.GATSBY_TEMPLATE;
-    const KEY = process.env.GATSBY_KEY;
+    const SERVICE = await process.env.GATSBY_SERVICE;
+    const TEMPLATE = await process.env.GATSBY_TEMPLATE;
+    const KEY = await process.env.GATSBY_KEY;
+
+    console.log(KEY);
 
     emailjs.sendForm(SERVICE, TEMPLATE, form.current, KEY).then(
       (result) => {
         setStatus(result.text);
         setCan(true);
-        console.log(result.text);
+        // console.log(result.text);
         form.current.reset();
       },
       (error) => {

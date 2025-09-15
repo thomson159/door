@@ -86,6 +86,7 @@ export const theme = (darkMode) => ({
     black: "#000000",
 
     whiteBlack: darkMode ? "#FFFFFF" : "#000000",
+    blackWhite: darkMode ? "#000000" : "#FFFFFF",
 
     green1: "#E6F3EC",
     green2: "#27AE60",

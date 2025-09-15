@@ -10,3 +10,6 @@ public_dev
 .cache
 public
 .env
+.env.development
+.env.production
+.env.local
