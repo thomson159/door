@@ -150,7 +150,7 @@ export default function Menu({ data, onClick }) {
 
   return (
     <StyledMenu tabIndex={0}>
-      <StyledMenuTitle>{content}</StyledMenuTitle>
+      {/* <StyledMenuTitle>{content}</StyledMenuTitle> */}
     </StyledMenu>
   );
 }

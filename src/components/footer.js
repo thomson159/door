@@ -43,7 +43,7 @@ const Footer = () => {
 
   return (
     <StyledFooter>
-      <StyledFooterLinkSection>
+      {/* <StyledFooterLinkSection>
         <StyledFooterSection>
           <p style={{ margin: 0, marginRight: 20 }}>
             © {new Date().getFullYear()}
@@ -58,7 +58,7 @@ const Footer = () => {
             {t("policy")}
           </StyledFooterLink>
         </StyledFooterSection>
-      </StyledFooterLinkSection>
+      </StyledFooterLinkSection> */}
     </StyledFooter>
   );
 };

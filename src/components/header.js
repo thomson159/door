@@ -208,12 +208,12 @@ const Header = () => {
         <StyledButton type="button" onClick={toggleDarkMode}>
           {darkMode ? <Sun size={20} /> : <Moon size={20} />}
         </StyledButton>
-        <StyledButton
+        {/* <StyledButton
           type="button"
           onClick={() => changeLang(currentLang === "en" ? "pl" : "en")}
         >
           {currentLang.toUpperCase()}
-        </StyledButton>
+        </StyledButton> */}
       </StyledNav>
     </StyledHeader>
   );

@@ -12,6 +12,6 @@ export function onRouteUpdate({ location }) {
 }
 
 export const onInitialClientRender = () => {
-  const lng = localStorage.getItem("i18nextLng") || "en";
+  const lng = localStorage.getItem("i18nextLng") || "pl";
   i18n.changeLanguage(lng);
 };

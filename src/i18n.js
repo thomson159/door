@@ -7,8 +7,8 @@ const savedLng =
   typeof window !== "undefined" ? localStorage.getItem("i18nextLng") : null;
 
 i18n.use(initReactI18next).init({
-  fallbackLng: "en",
-  lng: savedLng || "en", // ← ustawia język z localStorage
+  fallbackLng: "pl",
+  lng: savedLng || "pl", // ← ustawia język z localStorage
   resources: {
     en: { translation: en },
     pl: { translation: pl },

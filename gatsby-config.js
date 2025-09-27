@@ -6,12 +6,12 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    title: `Premium Bullet Shell Pens – 243Pen.store`,
-    description: `Handcrafted, exclusive pens made from fired bullet casings. A unique blend of craftsmanship, history, and elegance. Perfect as a gift.`,
+    title: `Awaryjne otwieranie drzwi — domy, mieszkania, garaże Bielsko‑Biała, Żywiec i okolice`,
+    description: `Awaryjne otwieranie drzwi — domy, mieszkania, garaże Bielsko‑Biała, Żywiec i okolice`,
     author: `@thomson159`,
     menulinks: menu,
     siteUrl: `https://243pen.store`,
-    repository: `https://github.com/thomson159/pen`,
+    repository: `https://github.com/thomson159/door`,
     commit: process.env.NOW_GITHUB_COMMIT_SHA || `main`,
   },
   flags: {

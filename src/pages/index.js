@@ -229,28 +229,32 @@ const IndexPage = (props) => {
 
   return (
     <Layout>
-      <SEO title={t("title")} path={props.location.pathname} lang={lang} />
+      <SEO
+        title={
+          "Awaryjne otwieranie drzwi, domy, mieszkania, garaże Bielsko‑Biała, Żywiec i okolice"
+        }
+        path={props.location.pathname}
+        lang={lang}
+      />
       <BG />
       <StyledBody>
         <StyledSlogan>
           <StyledItemRow>
             <StyledItemColumn>
-              <StyledBodyTitle>{t("ecosystem.title_1")}</StyledBodyTitle>
-              <StyledBodySubText>{t("ecosystem.desc_1")}</StyledBodySubText>
-              <StyledBodySubText>{t("ecosystem.desc_2")}</StyledBodySubText>
-            </StyledItemColumn>
-            <StyledItemColumn>
-              <ModelScene />
+              <StyledBodyTitle>
+                Awaryjne otwieranie drzwi — domy, mieszkania, garaże <br />{" "}
+                <br />
+                Bielsko‑Biała, Żywiec i okolice <br /> <br />
+                Adrian: <a href="tel:+48 518 843 694">
+                  +48 518 843 694
+                </a> <br /> <br />
+              </StyledBodyTitle>
+              {/* <StyledBodySubText>{t("ecosystem.desc_1")}</StyledBodySubText>
+              <StyledBodySubText>{t("ecosystem.desc_2")}</StyledBodySubText> */}
             </StyledItemColumn>
           </StyledItemRow>
         </StyledSlogan>
-        <EcosystemSection />
-        <StyledItemRow style={{ marginBottom: "4rem" }}>
-          <StyledItemColumn>
-            <StyledBodySlogan>{t("slogan")}</StyledBodySlogan>
-          </StyledItemColumn>
-        </StyledItemRow>
-        <ContactSection language={props.pageContext.language} />
+        {/* <ContactSection language={props.pageContext.language} /> */}
       </StyledBody>
     </Layout>
   );
@@ -279,7 +283,7 @@ const StyledSectionHeader = styled.h1`
 `;
 
 const StyledSlogan = styled.div`
-  min-height: calc(100vh - 157px);
+  // min-height: calc(100vh - 157px);
 `;
 
 const StyledSection = styled.section`
