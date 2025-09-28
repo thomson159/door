@@ -234,7 +234,8 @@ const IndexPage = (props) => {
           "Awaryjne otwieranie drzwi, domy, mieszkania, garaże Bielsko‑Biała, Żywiec i okolice"
         }
         path={props.location.pathname}
-        lang={lang}
+        // lang={lang}
+        lang={"pl"}
       />
       <BG />
       <StyledBody>
@@ -245,9 +246,9 @@ const IndexPage = (props) => {
                 Awaryjne otwieranie drzwi — domy, mieszkania, garaże <br />{" "}
                 <br />
                 Bielsko‑Biała, Żywiec i okolice <br /> <br />
-                Adrian: <a href="tel:+48 518 843 694">
+                {/* Adrian: <a href="tel:+48 518 843 694">
                   +48 518 843 694
-                </a> <br /> <br />
+                </a> <br /> <br /> */}
               </StyledBodyTitle>
               {/* <StyledBodySubText>{t("ecosystem.desc_1")}</StyledBodySubText>
               <StyledBodySubText>{t("ecosystem.desc_2")}</StyledBodySubText> */}

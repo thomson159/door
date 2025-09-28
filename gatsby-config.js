@@ -82,7 +82,9 @@ module.exports = {
           {
             resolve: `gatsby-remark-twitter-cards`,
             options: {
-              title: "Premium Bullet Shell Pens – 243Pen.store",
+              // title: "Premium Bullet Shell Pens – 243Pen.store",
+              title:
+                "Awaryjne otwieranie drzwi — domy, mieszkania, garaże Bielsko‑Biała, Żywiec i okolice",
               separator: "|",
               author: "@thomson159",
               // background: require.resolve('./static/images/twitter_card.png'), // path to 1200x630px file or hex code, defaults to black (#000000)

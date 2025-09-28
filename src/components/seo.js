@@ -16,21 +16,21 @@ function SEO({ lang, title, path }) {
     `
   );
 
-  const keywordsPL =
-    "długopis z łusek, długopis z łuski kalibru .243, ręcznie robiony długopis, długopis kolekcjonerski, długopis z naboju, personalizowany długopis, unikalny długopis, prezent dla mężczyzny, prezent dla kolekcjonera, premium długopis, sklep z długopisami";
-  const keywordsEN =
-    "shell pen, .243 caliber shell pen, handmade pen, collectible pen, cartridge pen, personalized pen, unique pen, gift for man, gift for collector, premium pen, pen store";
+  // const keywordsPL =
+  //   "długopis z łusek, długopis z łuski kalibru .243, ręcznie robiony długopis, długopis kolekcjonerski, długopis z naboju, personalizowany długopis, unikalny długopis, prezent dla mężczyzny, prezent dla kolekcjonera, premium długopis, sklep z długopisami";
+  // const keywordsEN =
+  //   "shell pen, .243 caliber shell pen, handmade pen, collectible pen, cartridge pen, personalized pen, unique pen, gift for man, gift for collector, premium pen, pen store";
 
-  const metaKeywords = lang === "pl" ? keywordsPL : keywordsEN;
+  // const metaKeywords = lang === "pl" ? keywordsPL : keywordsEN;
 
-  const descriptions = {
-    pl:
-      "Ręcznie robione, ekskluzywne długopisy z używanych łusek. Unikalne połączenie rzemiosła i historii. Idealny prezent.",
-    en:
-      "Handcrafted, exclusive pens made from fired bullet casings. A unique blend of craftsmanship, history, and elegance. Perfect as a gift.",
-  };
+  // const descriptions = {
+  //   pl:
+  //     "Ręcznie robione, ekskluzywne długopisy z używanych łusek. Unikalne połączenie rzemiosła i historii. Idealny prezent.",
+  //   en:
+  //     "Handcrafted, exclusive pens made from fired bullet casings. A unique blend of craftsmanship, history, and elegance. Perfect as a gift.",
+  // };
 
-  const metaDescription = descriptions[lang] || descriptions.en;
+  // const metaDescription = descriptions[lang] || descriptions.en;
 
   return (
     <Helmet
@@ -42,12 +42,27 @@ function SEO({ lang, title, path }) {
       titleTemplate={`%s`}
     >
       <meta charSet="utf-8" />
-      <meta name="title" content={title} />
-      <meta name="description" content={metaDescription} />
-      <meta name="keywords" content={metaKeywords} />
+      <meta
+        name="title"
+        content={
+          "Awaryjne otwieranie drzwi — domy, mieszkania, garaże Bielsko‑Biała, Żywiec i okolice"
+        }
+      />
+      <meta
+        name="description"
+        content={
+          "Awaryjne otwieranie drzwi — domy, mieszkania, garaże Bielsko‑Biała, Żywiec i okolice"
+        }
+      />
+      {/* <meta name="keywords" content={metaKeywords} /> */}
 
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={metaDescription} />
+      <meta
+        property="og:title"
+        content={
+          "Awaryjne otwieranie drzwi — domy, mieszkania, garaże Bielsko‑Biała, Żywiec i okolice"
+        }
+      />
+      {/* <meta property="og:description" content={metaDescription} /> */}
       <meta property="og:type" content={"website"} />
       <meta property="og:url" content={site.siteMetadata.siteUrl + path} />
 
@@ -62,7 +77,7 @@ function SEO({ lang, title, path }) {
 }
 
 SEO.defaultProps = {
-  lang: `en`,
+  lang: `pl`,
 };
 
 SEO.propTypes = {
